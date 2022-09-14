@@ -1,0 +1,23 @@
+<h1>Hello World!</h1>
+
+<p>This is my first webpage.</p>
+
+<p>My name is {{ template_first_name | capitalize }}</p>
+
+<p>{{ template_stuff | title }}</p>
+
+<h3>Favorite Pizza</h3>
+
+{% for pizza in template_pizza %}
+    {% if pizza == 41 %}
+     <ul>
+        <li>{{pizza + 100}}</li>
+    </ul>
+    {% else %}
+        <ul>
+            <li>{{pizza}}</li>
+        </ul>
+    {% endif %}
+{% endfor %}
+
+{{ template_pizza[0] }}
