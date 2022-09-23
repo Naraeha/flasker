@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br />
+<h2> You searched for: <em>{{ searched }}</em></h2>
+<br />
+
+{% if posts %}
+    {% for post in posts %}
+    <div class="shadow p-3 mb-5 bg-body rounded">
+    <h2><a href="{{ url_for("post", id=post.id) }}">{{ post.title }}</a></h2>
+    <br />
+        By: {{ post.poster.name }}
+    <br />
+    <small>{{ post.date_posted }}</small>
+    <hr>
+    <br />
+    {{ post.content | safe }}
+    <br />
+    <br />
+    <a href="{{ url_for("post", id=post.id) }}" class="btn btn-outline-secondary btn-sm">View Post</a>
+        {% if post.poster_id == current_user.id %}
+    <a href="{{ url_for("delete_post", id=post.id) }}" class="btn btn-outline-danger btn-sm">Delete Post</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% else %}
+Couldn't find <em>{{ searched }}</em>.
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{{ url_for("index") }}">Flask Learning</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("user", name="Naraeha")}}">User Profile</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("name")}}">Name</a>
+          </li>
+
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("test_pw")}}">Test Password</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("add_post")}}">Add Blog Post</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("posts")}}">Blog Posts</a>
+          </li>
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("dashboard")}}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("logout")}}">Logout</a>
+          </li>
+              {% if current_user.id == 14 %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{{url_for("admin")}}">Admin</a>
+              </li>
+              {% endif %}
+          {% else %}
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("add_user")}}">Register</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for("login")}}">Login</a>
+          </li>
+          {% endif %}
+
+      </ul>
+    <form method="POST" action="{{ url_for("search") }}" class="form-inline my-2 my-lg-0">
+        {{ form.hidden_tag() }}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search", name="searched">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
