@@ -477,7 +477,7 @@ class Users(db.Model, UserMixin):
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    content = db.Column(db.Text)
+    content = db.Column(db.Text())
     #author = db.Column(db.String(200), nullable=False)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     slug = db.Column(db.String(200))
