@@ -24,7 +24,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 # mysql://username:password@localhost/db_name
 #app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:freeto753@localhost/our_users'
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://ilblfxjfbunwqc:041ad37ea611794423c41dbd5df5e909aeaac3dfb0c44cff355947ad9d0afe09@ec2-18-215-41-121.compute-1.amazonaws.com:5432/d2r08g4le4mqaq'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://ilblfxjfbunwqc:041ad37ea611794423c41dbd5df5e909aeaac3dfb0c44cff355947ad9d0afe09@ec2-18-215-41-121.compute-1.amazonaws.com:5432/d2r08g4le4mqaq'
 
 # Secret key
 app.config["SECRET_KEY"] = "secret key"
