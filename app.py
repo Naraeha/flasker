@@ -133,29 +133,40 @@ def dashboard():
         name_to_update.favorite_color = request.form["favorite_color"]
         name_to_update.usernamme = request.form["username"]
         name_to_update.about_author = request.form["about_author"]
-        name_to_update.profile_pic = request.files["profile_pic"]
-        
-        # Grab Image Name
-        pic_filename = secure_filename(name_to_update.profile_pic.filename)
-        #Set uuid
-        pic_name = str(uuid.uuid1()) + "_" + pic_filename
         
 
-        # Save the Image
-        saver =  request.files["profile_pic"]
+        # Check for profile pic
+        if request.files["profile_pic"]:
+            name_to_update.profile_pic = request.files["profile_pic"]
         
 
-        # Change it to a string save to db
-        name_to_update.profile_pic = pic_name
+        
+            # Grab Image Name
+            pic_filename = secure_filename(name_to_update.profile_pic.filename)
+            #Set uuid
+            pic_name = str(uuid.uuid1()) + "_" + pic_filename
+        
 
-        try:
+            # Save the Image
+            saver =  request.files["profile_pic"]
+        
+
+            # Change it to a string save to db
+            name_to_update.profile_pic = pic_name
+
+            try:
+                db.session.commit()
+                saver.save(os.path.join(app.config["UPLOAD_FOLDER"], pic_name))
+                flash("User updated Successfully.")
+                return render_template("dashboard.html", form=form, name_to_update=name_to_update)
+            except:
+                flash("Error - Something went wrong in updating the database.")
+                return render_template("dashboard.html", form=form, name_to_update=name_to_update)
+        else:
             db.session.commit()
-            saver.save(os.path.join(app.config["UPLOAD_FOLDER"], pic_name))
             flash("User updated Successfully.")
             return render_template("dashboard.html", form=form, name_to_update=name_to_update)
-        except:
-            flash("Error - Something went wrong in updating the database.")
-            return render_template("dashboard.html", form=form, name_to_update=name_to_update)
+
     else:
          return render_template("dashboard.html", form=form, name_to_update=name_to_update, id=id)
 
@@ -191,7 +202,7 @@ def delete_post(id):
     post_delete = Posts.query.get_or_404(id)
     id = current_user.id
 
-    if id == post_delete.poster.id:
+    if id == post_delete.poster.id or id == 14:
         try:
             db.session.delete(post_delete)
             db.session.commit()
@@ -230,7 +241,7 @@ def edit(id):
         flash("Post has been updated.")
         return redirect(url_for("post", id=post.id))
    
-    if current_user.id == post.poster_id:
+    if current_user.id == post.poster_id or current_user.id == 14:
         form.title.data = post.title
         #form.author.data = post.author
         form.slug.data = post.slug
@@ -277,14 +288,8 @@ def posts():
 
 # Create a route decorator
 @app.route("/")
-def index():
-    first_name = "Naraeha"
-    stuff = "This is bold text"
-    favorite_pizza = ["Pepperoni", "cheese", "mushrooms", 41]
-    return render_template("index.html", 
-                           template_first_name=first_name,
-                           template_stuff=stuff,
-                           template_pizza=favorite_pizza)
+def index(): 
+    return render_template("index.html")
 
 #-----------------------------------------------------------------------------------------------------------
 

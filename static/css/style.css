@@ -4,6 +4,11 @@ h1 {
 
 }
 
+#home {
+    color: #6D6D6D;
+    font-size: 60px;
+}
+
 body {
     background: #f4f4f4;
 }

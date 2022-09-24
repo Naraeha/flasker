@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-              <a class="nav-link" href="{{url_for("user", name="Naraeha")}}">User Profile</a>
+              <a class="nav-link" href="{{url_for("user", name="*Type name in url bar*")}}">User Profile</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="{{url_for("name")}}">Name</a>
@@ -45,7 +45,7 @@
       </ul>
     <form method="POST" action="{{ url_for("search") }}" class="form-inline my-2 my-lg-0">
         {{ form.hidden_tag() }}
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search", name="searched">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search Blog" aria-label="Search", name="searched">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>

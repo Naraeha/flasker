@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\templates"
+    "\\static",
+    "\\static\\images",
+    "\\static\\js",
+    "\\templates",
+    "\\virt"
   ],
-  "SelectedNode": "\\webforms.py",
+  "SelectedNode": "\\app.py",
   "PreviewInSolutionExplorer": false
 }
